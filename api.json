@@ -1,0 +1,1522 @@
+{
+  "v": 9,
+  "name": "havenly",
+  "folders": [
+    {
+      "v": 9,
+      "name": "Auth",
+      "folders": [],
+      "requests": [
+        {
+          "v": "15",
+          "name": "Register user",
+          "method": "POST",
+          "endpoint": "http://localhost:8000/api/auth/register",
+          "params": [],
+          "headers": [],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": "application/json",
+            "body": "{\n  \"name\": \"Gin\",\n  \"email\": \"gin@email.com\",\n  \"password\": \"123456\",\n  \"password_confirmation\": \"123456\",\n  \"address\": \"test\",\n  \"phone\": \"123\",\n  \"dob\": \"2025-04-04\"\n}"
+          },
+          "requestVariables": [],
+          "responses": {}
+        },
+        {
+          "v": "15",
+          "name": "Login user",
+          "method": "POST",
+          "endpoint": "http://localhost:8000/api/auth/login",
+          "params": [],
+          "headers": [],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": "application/json",
+            "body": "{\n\t\"email\": \"hung@gmail.com\",\n\t\"password\": \"123456\"\n}\n"
+          },
+          "requestVariables": [],
+          "responses": {}
+        },
+        {
+          "v": "15",
+          "name": "Login admin",
+          "method": "POST",
+          "endpoint": "http://localhost:8000/api/auth/login",
+          "params": [],
+          "headers": [],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": "application/json",
+            "body": "{\n\t\"email\": \"admin@gmail.com\",\n\t\"password\": \"123456\"\n}\n"
+          },
+          "requestVariables": [],
+          "responses": {}
+        },
+        {
+          "v": "15",
+          "name": "Get profile",
+          "method": "GET",
+          "endpoint": "http://localhost:8000/api/auth/profile",
+          "params": [],
+          "headers": [],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": null,
+            "body": null
+          },
+          "requestVariables": [],
+          "responses": {}
+        },
+        {
+          "v": "15",
+          "name": "Logout",
+          "method": "POST",
+          "endpoint": "http://localhost:8000/api/auth/logout",
+          "params": [],
+          "headers": [],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": null,
+            "body": null
+          },
+          "requestVariables": [],
+          "responses": {}
+        },
+        {
+          "v": "15",
+          "name": "Update profile",
+          "method": "PUT",
+          "endpoint": "http://localhost:8000/api/auth/profile",
+          "params": [],
+          "headers": [],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": "application/json",
+            "body": "{\n  \"name\": \"eriegin\"\n}"
+          },
+          "requestVariables": [],
+          "responses": {}
+        },
+        {
+          "v": "15",
+          "name": "Change password",
+          "method": "PUT",
+          "endpoint": "http://localhost:8000/api/auth/change-password",
+          "params": [],
+          "headers": [],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": "application/json",
+            "body": "{\n  \"current_password\": \"654321\",\n  \"password\": \"123456\",\n  \"password_confirmation\": \"123456\"\n}"
+          },
+          "requestVariables": [],
+          "responses": {}
+        }
+      ],
+      "auth": {
+        "authType": "inherit",
+        "authActive": true
+      },
+      "headers": [],
+      "_ref_id": "coll_mdwrsja2_af835638-ce6e-46c9-915f-4e308169723a"
+    },
+    {
+      "v": 9,
+      "name": "Public",
+      "folders": [
+        {
+          "v": 9,
+          "name": "Public facilities",
+          "folders": [],
+          "requests": [
+            {
+              "v": "15",
+              "name": "Get facilities",
+              "method": "GET",
+              "endpoint": "http://localhost:8000/api/facilities",
+              "params": [],
+              "headers": [],
+              "preRequestScript": "",
+              "testScript": "",
+              "auth": {
+                "authType": "inherit",
+                "authActive": true
+              },
+              "body": {
+                "contentType": null,
+                "body": null
+              },
+              "requestVariables": [],
+              "responses": {}
+            },
+            {
+              "v": "15",
+              "name": "Get facilities by id",
+              "method": "GET",
+              "endpoint": "http://localhost:8000/api/facilities/4",
+              "params": [],
+              "headers": [],
+              "preRequestScript": "",
+              "testScript": "",
+              "auth": {
+                "authType": "inherit",
+                "authActive": true
+              },
+              "body": {
+                "contentType": null,
+                "body": null
+              },
+              "requestVariables": [],
+              "responses": {}
+            }
+          ],
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "headers": [],
+          "_ref_id": "coll_mdzofkhu_98200a9d-b950-401f-8904-230db6899e84"
+        },
+        {
+          "v": 9,
+          "name": "Public features",
+          "folders": [],
+          "requests": [
+            {
+              "v": "15",
+              "name": "Get features",
+              "method": "GET",
+              "endpoint": "http://localhost:8000/api/features",
+              "params": [],
+              "headers": [],
+              "preRequestScript": "",
+              "testScript": "",
+              "auth": {
+                "authType": "inherit",
+                "authActive": true
+              },
+              "body": {
+                "contentType": null,
+                "body": null
+              },
+              "requestVariables": [],
+              "responses": {}
+            },
+            {
+              "v": "15",
+              "name": "Get features by id",
+              "method": "GET",
+              "endpoint": "http://localhost:8000/api/features/4",
+              "params": [],
+              "headers": [],
+              "preRequestScript": "",
+              "testScript": "",
+              "auth": {
+                "authType": "inherit",
+                "authActive": true
+              },
+              "body": {
+                "contentType": null,
+                "body": null
+              },
+              "requestVariables": [],
+              "responses": {}
+            }
+          ],
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "headers": [],
+          "_ref_id": "coll_mdzofqyj_ad37d00a-ca85-4882-b86e-3b8373e99584"
+        },
+        {
+          "v": 9,
+          "name": "Public room types",
+          "folders": [],
+          "requests": [
+            {
+              "v": "15",
+              "name": "Get room types",
+              "method": "GET",
+              "endpoint": "http://localhost:8000/api/room-types",
+              "params": [],
+              "headers": [],
+              "preRequestScript": "",
+              "testScript": "",
+              "auth": {
+                "authType": "inherit",
+                "authActive": true
+              },
+              "body": {
+                "contentType": null,
+                "body": null
+              },
+              "requestVariables": [],
+              "responses": {}
+            },
+            {
+              "v": "15",
+              "name": "Get room types by id",
+              "method": "GET",
+              "endpoint": "http://localhost:8000/api/room-types/1",
+              "params": [],
+              "headers": [],
+              "preRequestScript": "",
+              "testScript": "",
+              "auth": {
+                "authType": "inherit",
+                "authActive": true
+              },
+              "body": {
+                "contentType": null,
+                "body": null
+              },
+              "requestVariables": [],
+              "responses": {}
+            }
+          ],
+          "auth": {
+            "authActive": true,
+            "authType": "inherit"
+          },
+          "headers": [],
+          "_ref_id": "coll_mdzofzew_a5019ac5-3e3b-41be-95f2-75888e5265bc"
+        },
+        {
+          "v": 9,
+          "name": "Public queries",
+          "folders": [],
+          "requests": [
+            {
+              "v": "15",
+              "name": "Create query",
+              "method": "POST",
+              "endpoint": "http://localhost:8000/api/contact",
+              "params": [],
+              "headers": [],
+              "preRequestScript": "",
+              "testScript": "",
+              "auth": {
+                "authType": "inherit",
+                "authActive": true
+              },
+              "body": {
+                "contentType": "application/json",
+                "body": "{\n  \"name\": \"ABC\",\n  \"email\": \"a@gmail.com\",\n  \"subject\": \"Test\",\n  \"message\": \"Test message\"\n}"
+              },
+              "requestVariables": [],
+              "responses": {}
+            }
+          ],
+          "auth": {
+            "authActive": true,
+            "authType": "inherit"
+          },
+          "headers": [],
+          "_ref_id": "coll_me15x2m4_f3f7dbb8-11ce-4842-a758-6a9ed845c2cd"
+        }
+      ],
+      "requests": [],
+      "auth": {
+        "authActive": true,
+        "authType": "inherit"
+      },
+      "headers": [],
+      "_ref_id": "coll_mdzfu2q0_d3df3298-a47d-41ce-a86c-63163366cded"
+    },
+    {
+      "v": 9,
+      "name": "Admin",
+      "folders": [
+        {
+          "v": 9,
+          "name": "Admin facilities",
+          "folders": [],
+          "requests": [
+            {
+              "v": "15",
+              "name": "Get all facilities",
+              "method": "GET",
+              "endpoint": "http://localhost:8000/api/admin/facilities",
+              "params": [
+                {
+                  "key": "limit",
+                  "value": "10",
+                  "active": true,
+                  "description": ""
+                },
+                {
+                  "key": "page",
+                  "value": "2",
+                  "active": true,
+                  "description": ""
+                }
+              ],
+              "headers": [],
+              "preRequestScript": "",
+              "testScript": "",
+              "auth": {
+                "authType": "inherit",
+                "authActive": true
+              },
+              "body": {
+                "contentType": null,
+                "body": null
+              },
+              "requestVariables": [],
+              "responses": {}
+            },
+            {
+              "v": "15",
+              "name": "Get facility by id",
+              "method": "GET",
+              "endpoint": "http://localhost:8000/api/admin/facilities/1",
+              "params": [],
+              "headers": [],
+              "preRequestScript": "",
+              "testScript": "",
+              "auth": {
+                "authType": "inherit",
+                "authActive": true
+              },
+              "body": {
+                "contentType": null,
+                "body": null
+              },
+              "requestVariables": [],
+              "responses": {}
+            },
+            {
+              "v": "15",
+              "name": "Create facility",
+              "method": "POST",
+              "endpoint": "http://localhost:8000/api/admin/facilities",
+              "params": [],
+              "headers": [],
+              "preRequestScript": "",
+              "testScript": "",
+              "auth": {
+                "authType": "inherit",
+                "authActive": true
+              },
+              "body": {
+                "contentType": "application/json",
+                "body": "{\n  \"name\": \"test\",\n  \"content\": \"Test content\",\n  \"description\": \"this test is for test\"\n}"
+              },
+              "requestVariables": [],
+              "responses": {}
+            },
+            {
+              "v": "15",
+              "name": "Update facility",
+              "method": "PUT",
+              "endpoint": "http://localhost:8000/api/admin/facilities/15",
+              "params": [],
+              "headers": [],
+              "preRequestScript": "",
+              "testScript": "",
+              "auth": {
+                "authType": "inherit",
+                "authActive": true
+              },
+              "body": {
+                "contentType": "application/json",
+                "body": "{\n  \"name\": \"test1\"\n}"
+              },
+              "requestVariables": [],
+              "responses": {}
+            },
+            {
+              "v": "15",
+              "name": "Delete facility",
+              "method": "DELETE",
+              "endpoint": "http://localhost:8000/api/admin/facilities/15",
+              "params": [],
+              "headers": [],
+              "preRequestScript": "",
+              "testScript": "",
+              "auth": {
+                "authType": "inherit",
+                "authActive": true
+              },
+              "body": {
+                "contentType": null,
+                "body": null
+              },
+              "requestVariables": [],
+              "responses": {}
+            }
+          ],
+          "auth": {
+            "authActive": true,
+            "authType": "inherit"
+          },
+          "headers": [],
+          "_ref_id": "coll_mdzfunn6_30fd5fd6-2b3a-47d3-a57d-0fae64e05ae8"
+        },
+        {
+          "v": 9,
+          "name": "Admin features",
+          "folders": [],
+          "requests": [
+            {
+              "v": "15",
+              "name": "Get all features",
+              "method": "GET",
+              "endpoint": "http://localhost:8000/api/admin/features",
+              "params": [
+                {
+                  "key": "limit",
+                  "value": "10",
+                  "active": true,
+                  "description": ""
+                },
+                {
+                  "key": "page",
+                  "value": "2",
+                  "active": true,
+                  "description": ""
+                }
+              ],
+              "headers": [],
+              "preRequestScript": "",
+              "testScript": "",
+              "auth": {
+                "authType": "inherit",
+                "authActive": true
+              },
+              "body": {
+                "contentType": null,
+                "body": null
+              },
+              "requestVariables": [],
+              "responses": {}
+            },
+            {
+              "v": "15",
+              "name": "Get features by id",
+              "method": "GET",
+              "endpoint": "http://localhost:8000/api/admin/features/1",
+              "params": [],
+              "headers": [],
+              "preRequestScript": "",
+              "testScript": "",
+              "auth": {
+                "authType": "inherit",
+                "authActive": true
+              },
+              "body": {
+                "contentType": null,
+                "body": null
+              },
+              "requestVariables": [],
+              "responses": {}
+            },
+            {
+              "v": "15",
+              "name": "Create feature",
+              "method": "POST",
+              "endpoint": "http://localhost:8000/api/admin/features",
+              "params": [],
+              "headers": [],
+              "preRequestScript": "",
+              "testScript": "",
+              "auth": {
+                "authType": "inherit",
+                "authActive": true
+              },
+              "body": {
+                "contentType": "application/json",
+                "body": "{\n  \"name\": \"test\",\n  \"content\": \"Test content\"\n}"
+              },
+              "requestVariables": [],
+              "responses": {}
+            },
+            {
+              "v": "15",
+              "name": "Update feature",
+              "method": "PUT",
+              "endpoint": "http://localhost:8000/api/admin/features/12",
+              "params": [],
+              "headers": [],
+              "preRequestScript": "",
+              "testScript": "",
+              "auth": {
+                "authType": "inherit",
+                "authActive": true
+              },
+              "body": {
+                "contentType": "application/json",
+                "body": "{\n  \"name\": \"test1\"\n}"
+              },
+              "requestVariables": [],
+              "responses": {}
+            },
+            {
+              "v": "15",
+              "name": "Delete feature",
+              "method": "DELETE",
+              "endpoint": "http://localhost:8000/api/admin/features/12",
+              "params": [],
+              "headers": [],
+              "preRequestScript": "",
+              "testScript": "",
+              "auth": {
+                "authType": "inherit",
+                "authActive": true
+              },
+              "body": {
+                "contentType": null,
+                "body": null
+              },
+              "requestVariables": [],
+              "responses": {}
+            }
+          ],
+          "auth": {
+            "authActive": true,
+            "authType": "inherit"
+          },
+          "headers": [],
+          "_ref_id": "coll_mdzkrzyu_3b252efd-4fa2-4fba-b948-cb7805261fb5"
+        },
+        {
+          "v": 9,
+          "name": "Admin room types",
+          "folders": [],
+          "requests": [
+            {
+              "v": "15",
+              "name": "Get all room types",
+              "method": "GET",
+              "endpoint": "http://localhost:8000/api/admin/room-types",
+              "params": [],
+              "headers": [],
+              "preRequestScript": "",
+              "testScript": "",
+              "auth": {
+                "authType": "inherit",
+                "authActive": true
+              },
+              "body": {
+                "contentType": null,
+                "body": null
+              },
+              "requestVariables": [],
+              "responses": {}
+            },
+            {
+              "v": "15",
+              "name": "Get room type by id",
+              "method": "GET",
+              "endpoint": "http://localhost:8000/api/admin/room-types/6",
+              "params": [],
+              "headers": [],
+              "preRequestScript": "",
+              "testScript": "",
+              "auth": {
+                "authType": "inherit",
+                "authActive": true
+              },
+              "body": {
+                "contentType": null,
+                "body": null
+              },
+              "requestVariables": [],
+              "responses": {}
+            },
+            {
+              "v": "15",
+              "name": "Create room type",
+              "method": "POST",
+              "endpoint": "http://localhost:8000/api/admin/room-types",
+              "params": [],
+              "headers": [],
+              "preRequestScript": "",
+              "testScript": "",
+              "auth": {
+                "authType": "inherit",
+                "authActive": true
+              },
+              "body": {
+                "contentType": "application/json",
+                "body": "{\n  \"name\": \"VIP\",\n  \"area\": 20,\n  \"price\": 500000,\n  \"quantity\": 1,\n  \"adult\": 4,\n  \"children\": 4,\n  \"description\": \"This is VIPP\",\n  \"facilities\": [1,2,3],\n  \"features\": [4,5,6]\n}"
+              },
+              "requestVariables": [],
+              "responses": {}
+            },
+            {
+              "v": "15",
+              "name": "Edit room type",
+              "method": "PUT",
+              "endpoint": "http://localhost:8000/api/admin/room-types/6",
+              "params": [],
+              "headers": [],
+              "preRequestScript": "",
+              "testScript": "",
+              "auth": {
+                "authType": "inherit",
+                "authActive": true
+              },
+              "body": {
+                "contentType": "application/json",
+                "body": "{\n  \"name\": \"VIP\",\n  \"area\": 20,\n  \"price\": 500000,\n  \"quantity\": 1,\n  \"adult\": 4,\n  \"children\": 4,\n  \"description\": \"This is VIPP\",\n  \"facilities\": [1,2,3],\n  \"features\": [4,5,6],\n  \"images\": [\"storage/images/rooms/1754547843_tdo9JQxftZ.png\"],\n  \"thumbnail_image\": \"storage/images/rooms/1754547843_tdo9JQxftZ.png\",\n  \"replace_images\": true\n}"
+              },
+              "requestVariables": [],
+              "responses": {}
+            },
+            {
+              "v": "15",
+              "name": "Delete room type",
+              "method": "DELETE",
+              "endpoint": "http://localhost:8000/api/admin/room-types/6",
+              "params": [],
+              "headers": [],
+              "preRequestScript": "",
+              "testScript": "",
+              "auth": {
+                "authType": "inherit",
+                "authActive": true
+              },
+              "body": {
+                "contentType": null,
+                "body": null
+              },
+              "requestVariables": [],
+              "responses": {}
+            }
+          ],
+          "auth": {
+            "authActive": true,
+            "authType": "inherit"
+          },
+          "headers": [],
+          "_ref_id": "coll_mdzm2lbb_21be4534-a9c2-442c-8ba6-eb8ba7aab25b"
+        },
+        {
+          "v": 9,
+          "name": "Admin room images",
+          "folders": [],
+          "requests": [
+            {
+              "v": "15",
+              "name": "Get room images",
+              "method": "GET",
+              "endpoint": "http://localhost:8000/api/admin/room-images",
+              "params": [],
+              "headers": [],
+              "preRequestScript": "",
+              "testScript": "",
+              "auth": {
+                "authType": "inherit",
+                "authActive": true
+              },
+              "body": {
+                "contentType": null,
+                "body": null
+              },
+              "requestVariables": [],
+              "responses": {}
+            },
+            {
+              "v": "15",
+              "name": "Get room image by id",
+              "method": "GET",
+              "endpoint": "http://localhost:8000/api/admin/room-images/1",
+              "params": [],
+              "headers": [],
+              "preRequestScript": "",
+              "testScript": "",
+              "auth": {
+                "authType": "inherit",
+                "authActive": true
+              },
+              "body": {
+                "contentType": null,
+                "body": null
+              },
+              "requestVariables": [],
+              "responses": {}
+            },
+            {
+              "v": "15",
+              "name": "Create room image",
+              "method": "POST",
+              "endpoint": "http://localhost:8000/api/admin/room-images",
+              "params": [],
+              "headers": [],
+              "preRequestScript": "",
+              "testScript": "",
+              "auth": {
+                "authType": "inherit",
+                "authActive": true
+              },
+              "body": {
+                "contentType": null,
+                "body": null
+              },
+              "requestVariables": [],
+              "responses": {}
+            },
+            {
+              "v": "15",
+              "name": "Update room image",
+              "method": "PUT",
+              "endpoint": "http://localhost:8000/api/admin/room-images/1",
+              "params": [],
+              "headers": [],
+              "preRequestScript": "",
+              "testScript": "",
+              "auth": {
+                "authType": "inherit",
+                "authActive": true
+              },
+              "body": {
+                "contentType": null,
+                "body": null
+              },
+              "requestVariables": [],
+              "responses": {}
+            },
+            {
+              "v": "15",
+              "name": "Delete room image",
+              "method": "DELETE",
+              "endpoint": "http://localhost:8000/api/admin/room-images/1",
+              "params": [],
+              "headers": [],
+              "preRequestScript": "",
+              "testScript": "",
+              "auth": {
+                "authType": "inherit",
+                "authActive": true
+              },
+              "body": {
+                "contentType": null,
+                "body": null
+              },
+              "requestVariables": [],
+              "responses": {}
+            },
+            {
+              "v": "15",
+              "name": "Set thumbnail",
+              "method": "POST",
+              "endpoint": "http://localhost:8000/api/admin/room-images/1/set-thumbnail",
+              "params": [],
+              "headers": [],
+              "preRequestScript": "",
+              "testScript": "",
+              "auth": {
+                "authType": "inherit",
+                "authActive": true
+              },
+              "body": {
+                "contentType": null,
+                "body": null
+              },
+              "requestVariables": [],
+              "responses": {}
+            }
+          ],
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "headers": [],
+          "_ref_id": "coll_mdzq2mw3_ee1df21e-796e-45cd-bbc5-baa2562971af"
+        },
+        {
+          "v": 9,
+          "name": "Admin Images",
+          "folders": [],
+          "requests": [
+            {
+              "v": "15",
+              "name": "Get all images",
+              "method": "GET",
+              "endpoint": "http://localhost:8000/api/admin/images",
+              "params": [],
+              "headers": [],
+              "preRequestScript": "",
+              "testScript": "",
+              "auth": {
+                "authType": "inherit",
+                "authActive": true
+              },
+              "body": {
+                "contentType": null,
+                "body": null
+              },
+              "requestVariables": [],
+              "responses": {}
+            },
+            {
+              "v": "15",
+              "name": "Upload Image",
+              "method": "POST",
+              "endpoint": "http://localhost:8000/api/admin/images/upload",
+              "params": [],
+              "headers": [],
+              "preRequestScript": "",
+              "testScript": "",
+              "auth": {
+                "authType": "inherit",
+                "authActive": true
+              },
+              "body": {
+                "contentType": null,
+                "body": null
+              },
+              "requestVariables": [],
+              "responses": {}
+            },
+            {
+              "v": "15",
+              "name": "Delete image",
+              "method": "DELETE",
+              "endpoint": "http://localhost:8000/api/admin/images",
+              "params": [],
+              "headers": [],
+              "preRequestScript": "",
+              "testScript": "",
+              "auth": {
+                "authType": "inherit",
+                "authActive": true
+              },
+              "body": {
+                "contentType": "application/json",
+                "body": "{\n  \"path\": \"storage/images/rooms/1754546898_JycNqbKhmQ.jpg\"\n}"
+              },
+              "requestVariables": [],
+              "responses": {}
+            },
+            {
+              "v": "15",
+              "name": "Get image by path",
+              "method": "GET",
+              "endpoint": "http://localhost:8000/storage/images/rooms/1754547434_pBXhiuikyY.jpg",
+              "params": [],
+              "headers": [],
+              "preRequestScript": "",
+              "testScript": "",
+              "auth": {
+                "authType": "inherit",
+                "authActive": true
+              },
+              "body": {
+                "contentType": null,
+                "body": null
+              },
+              "requestVariables": [],
+              "responses": {}
+            }
+          ],
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "headers": [],
+          "_ref_id": "coll_me0w2bqs_d64e24e2-1cfb-4e70-817f-d59ec5ff1e94"
+        },
+        {
+          "v": 9,
+          "name": "Admin  rooms",
+          "folders": [],
+          "requests": [
+            {
+              "v": "15",
+              "name": "Get all rooms",
+              "method": "GET",
+              "endpoint": "http://localhost:8000/api/admin/rooms",
+              "params": [],
+              "headers": [],
+              "preRequestScript": "",
+              "testScript": "",
+              "auth": {
+                "authType": "inherit",
+                "authActive": true
+              },
+              "body": {
+                "contentType": null,
+                "body": null
+              },
+              "requestVariables": [],
+              "responses": {}
+            },
+            {
+              "v": "15",
+              "name": "Get room by id",
+              "method": "GET",
+              "endpoint": "http://localhost:8000/api/admin/rooms/12",
+              "params": [],
+              "headers": [],
+              "preRequestScript": "",
+              "testScript": "",
+              "auth": {
+                "authType": "inherit",
+                "authActive": true
+              },
+              "body": {
+                "contentType": null,
+                "body": null
+              },
+              "requestVariables": [],
+              "responses": {}
+            },
+            {
+              "v": "15",
+              "name": "Create room",
+              "method": "POST",
+              "endpoint": "http://localhost:8000/api/admin/rooms",
+              "params": [],
+              "headers": [],
+              "preRequestScript": "",
+              "testScript": "",
+              "auth": {
+                "authType": "inherit",
+                "authActive": true
+              },
+              "body": {
+                "contentType": "application/json",
+                "body": "{\n  \"room_type_id\": 1,\n  \"room_number\": \"A123\"\n}"
+              },
+              "requestVariables": [],
+              "responses": {}
+            },
+            {
+              "v": "15",
+              "name": "Update room",
+              "method": "PUT",
+              "endpoint": "http://localhost:8000/api/admin/rooms/12",
+              "params": [],
+              "headers": [],
+              "preRequestScript": "",
+              "testScript": "",
+              "auth": {
+                "authType": "inherit",
+                "authActive": true
+              },
+              "body": {
+                "contentType": "application/json",
+                "body": "{\n  \"is_active\": false\n}"
+              },
+              "requestVariables": [],
+              "responses": {}
+            },
+            {
+              "v": "15",
+              "name": "Delete room",
+              "method": "DELETE",
+              "endpoint": "http://localhost:8000/api/admin/rooms/1",
+              "params": [],
+              "headers": [],
+              "preRequestScript": "",
+              "testScript": "",
+              "auth": {
+                "authType": "inherit",
+                "authActive": true
+              },
+              "body": {
+                "contentType": null,
+                "body": null
+              },
+              "requestVariables": [],
+              "responses": {}
+            },
+            {
+              "v": "15",
+              "name": "Get available rooms",
+              "method": "GET",
+              "endpoint": "http://localhost:8000/api/admin/rooms/available",
+              "params": [],
+              "headers": [],
+              "preRequestScript": "",
+              "testScript": "",
+              "auth": {
+                "authType": "inherit",
+                "authActive": true
+              },
+              "body": {
+                "contentType": "application/json",
+                "body": "{\n  \"room_type_id\": 1,\n  \"check_in_date\": \"2025-08-06\",\n  \"check_out_date\": \"2025-08-09\"\n}"
+              },
+              "requestVariables": [],
+              "responses": {}
+            },
+            {
+              "v": "15",
+              "name": "Get rooms by room type",
+              "method": "GET",
+              "endpoint": "http://localhost:8000/api/admin/rooms/room-type/1",
+              "params": [],
+              "headers": [],
+              "preRequestScript": "",
+              "testScript": "",
+              "auth": {
+                "authType": "inherit",
+                "authActive": true
+              },
+              "body": {
+                "contentType": "application/json",
+                "body": "{\n  \"room_type_id\": 1,\n  \"check_in_date\": \"2025-08-06\",\n  \"check_out_date\": \"2025-08-09\"\n}"
+              },
+              "requestVariables": [],
+              "responses": {}
+            }
+          ],
+          "auth": {
+            "authActive": true,
+            "authType": "inherit"
+          },
+          "headers": [],
+          "_ref_id": "coll_mdwrqzhv_d8c692e9-5d36-46d7-a27a-c409c7bd7ef4"
+        },
+        {
+          "v": 9,
+          "name": "Admin bookings",
+          "folders": [],
+          "requests": [
+            {
+              "v": "15",
+              "name": "Get bookings",
+              "method": "GET",
+              "endpoint": "http://localhost:8000/api/admin/bookings",
+              "params": [],
+              "headers": [],
+              "preRequestScript": "",
+              "testScript": "",
+              "auth": {
+                "authType": "inherit",
+                "authActive": true
+              },
+              "body": {
+                "contentType": null,
+                "body": null
+              },
+              "requestVariables": [],
+              "responses": {}
+            },
+            {
+              "v": "15",
+              "name": "Get bookings by id",
+              "method": "GET",
+              "endpoint": "http://localhost:8000/api/admin/bookings/1",
+              "params": [],
+              "headers": [],
+              "preRequestScript": "",
+              "testScript": "",
+              "auth": {
+                "authType": "inherit",
+                "authActive": true
+              },
+              "body": {
+                "contentType": null,
+                "body": null
+              },
+              "requestVariables": [],
+              "responses": {}
+            },
+            {
+              "v": "15",
+              "name": "Update booking",
+              "method": "PUT",
+              "endpoint": "http://localhost:8000/api/admin/bookings/13",
+              "params": [],
+              "headers": [],
+              "preRequestScript": "",
+              "testScript": "",
+              "auth": {
+                "authType": "inherit",
+                "authActive": true
+              },
+              "body": {
+                "contentType": "application/json",
+                "body": "{\n  \"status\": \"confirmed\"\n}"
+              },
+              "requestVariables": [],
+              "responses": {}
+            },
+            {
+              "v": "15",
+              "name": "Delete booking",
+              "method": "DELETE",
+              "endpoint": "http://localhost:8000/api/admin/bookings/1",
+              "params": [],
+              "headers": [],
+              "preRequestScript": "",
+              "testScript": "",
+              "auth": {
+                "authType": "inherit",
+                "authActive": true
+              },
+              "body": {
+                "contentType": null,
+                "body": null
+              },
+              "requestVariables": [],
+              "responses": {}
+            },
+            {
+              "v": "15",
+              "name": "Assign room to booking",
+              "method": "POST",
+              "endpoint": "http://localhost:8000/api/admin/bookings/1/assign-room",
+              "params": [],
+              "headers": [],
+              "preRequestScript": "",
+              "testScript": "",
+              "auth": {
+                "authType": "inherit",
+                "authActive": true
+              },
+              "body": {
+                "contentType": "application/json",
+                "body": "{\n  \"room_id\": 2\n}"
+              },
+              "requestVariables": [],
+              "responses": {}
+            }
+          ],
+          "auth": {
+            "authActive": true,
+            "authType": "inherit"
+          },
+          "headers": [],
+          "_ref_id": "coll_mdws27fz_2e39320f-975b-46ae-94a3-2a0010fa8dd1"
+        },
+        {
+          "v": 9,
+          "name": "Admin queries",
+          "folders": [],
+          "requests": [
+            {
+              "v": "15",
+              "name": "Get all queries",
+              "method": "GET",
+              "endpoint": "http://localhost:8000/api/admin/queries",
+              "params": [],
+              "headers": [],
+              "preRequestScript": "",
+              "testScript": "",
+              "auth": {
+                "authType": "inherit",
+                "authActive": true
+              },
+              "body": {
+                "contentType": null,
+                "body": null
+              },
+              "requestVariables": [],
+              "responses": {}
+            },
+            {
+              "v": "15",
+              "name": "Get query by id",
+              "method": "GET",
+              "endpoint": "http://localhost:8000/api/admin/queries/1",
+              "params": [],
+              "headers": [],
+              "preRequestScript": "",
+              "testScript": "",
+              "auth": {
+                "authType": "inherit",
+                "authActive": true
+              },
+              "body": {
+                "contentType": null,
+                "body": null
+              },
+              "requestVariables": [],
+              "responses": {}
+            },
+            {
+              "v": "15",
+              "name": "Delete query",
+              "method": "DELETE",
+              "endpoint": "http://localhost:8000/api/admin/queries/3",
+              "params": [],
+              "headers": [],
+              "preRequestScript": "",
+              "testScript": "",
+              "auth": {
+                "authType": "inherit",
+                "authActive": true
+              },
+              "body": {
+                "contentType": null,
+                "body": null
+              },
+              "requestVariables": [],
+              "responses": {}
+            },
+            {
+              "v": "15",
+              "name": "Delete multiple queries",
+              "method": "DELETE",
+              "endpoint": "http://localhost:8000/api/admin/queries",
+              "params": [],
+              "headers": [],
+              "preRequestScript": "",
+              "testScript": "",
+              "auth": {
+                "authType": "inherit",
+                "authActive": true
+              },
+              "body": {
+                "contentType": "application/json",
+                "body": "{\n  \"query_ids\": [1, 2]\n}"
+              },
+              "requestVariables": [],
+              "responses": {}
+            },
+            {
+              "v": "15",
+              "name": "Update read status",
+              "method": "PUT",
+              "endpoint": "http://localhost:8000/api/admin/queries/1/status",
+              "params": [],
+              "headers": [],
+              "preRequestScript": "",
+              "testScript": "",
+              "auth": {
+                "authType": "inherit",
+                "authActive": true
+              },
+              "body": {
+                "contentType": "application/json",
+                "body": "{\n  \"is_read\": true\n}"
+              },
+              "requestVariables": [],
+              "responses": {}
+            },
+            {
+              "v": "15",
+              "name": "Update multiple read status",
+              "method": "PUT",
+              "endpoint": "http://localhost:8000/api/admin/queries/status",
+              "params": [],
+              "headers": [],
+              "preRequestScript": "",
+              "testScript": "",
+              "auth": {
+                "authType": "inherit",
+                "authActive": true
+              },
+              "body": {
+                "contentType": "application/json",
+                "body": "{\n  \"query_ids\": [1, 2],\n  \"is_read\": false\n}"
+              },
+              "requestVariables": [],
+              "responses": {}
+            }
+          ],
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "headers": [],
+          "_ref_id": "coll_me162e7f_b68954dd-aea3-42a7-8563-671758008aa8"
+        }
+      ],
+      "requests": [],
+      "auth": {
+        "authType": "inherit",
+        "authActive": true
+      },
+      "headers": [],
+      "_ref_id": "coll_mdzftajl_aed12182-1e34-4705-b662-42c1bb4e8bc0"
+    },
+    {
+      "v": 9,
+      "name": "Users",
+      "folders": [
+        {
+          "v": 9,
+          "name": "User bookings",
+          "folders": [],
+          "requests": [
+            {
+              "v": "15",
+              "name": "Get bookings",
+              "method": "GET",
+              "endpoint": "http://localhost:8000/api/user/bookings",
+              "params": [],
+              "headers": [],
+              "preRequestScript": "",
+              "testScript": "",
+              "auth": {
+                "authType": "inherit",
+                "authActive": true
+              },
+              "body": {
+                "contentType": null,
+                "body": null
+              },
+              "requestVariables": [],
+              "responses": {}
+            },
+            {
+              "v": "15",
+              "name": "Get bookings by id",
+              "method": "GET",
+              "endpoint": "http://localhost:8000/api/user/bookings/1",
+              "params": [],
+              "headers": [],
+              "preRequestScript": "",
+              "testScript": "",
+              "auth": {
+                "authType": "inherit",
+                "authActive": true
+              },
+              "body": {
+                "contentType": null,
+                "body": null
+              },
+              "requestVariables": [],
+              "responses": {}
+            },
+            {
+              "v": "15",
+              "name": "Create booking",
+              "method": "POST",
+              "endpoint": "http://localhost:8000/api/user/bookings",
+              "params": [],
+              "headers": [],
+              "preRequestScript": "",
+              "testScript": "",
+              "auth": {
+                "authType": "inherit",
+                "authActive": true
+              },
+              "body": {
+                "contentType": "application/json",
+                "body": "{\n  \"room_type_id\": 4,\n  \"check_in_date\": \"2025-08-09\",\n  \"check_out_date\": \"2025-08-12\",\n  \"phone\": \"12345\",\n  \"adult\": 2,\n  \"children\": 0\n}"
+              },
+              "requestVariables": [],
+              "responses": {}
+            },
+            {
+              "v": "15",
+              "name": "Cancel booking",
+              "method": "POST",
+              "endpoint": "http://localhost:8000/api/user/bookings/1/cancel",
+              "params": [],
+              "headers": [],
+              "preRequestScript": "",
+              "testScript": "",
+              "auth": {
+                "authType": "inherit",
+                "authActive": true
+              },
+              "body": {
+                "contentType": null,
+                "body": null
+              },
+              "requestVariables": [],
+              "responses": {}
+            },
+            {
+              "v": "15",
+              "name": "Get bookings statistics",
+              "method": "GET",
+              "endpoint": "http://localhost:8000/api/user/bookings/statistics",
+              "params": [],
+              "headers": [],
+              "preRequestScript": "",
+              "testScript": "",
+              "auth": {
+                "authType": "inherit",
+                "authActive": true
+              },
+              "body": {
+                "contentType": null,
+                "body": null
+              },
+              "requestVariables": [],
+              "responses": {}
+            }
+          ],
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "headers": [],
+          "_ref_id": "coll_mdws51vn_5ad6ebb6-12d3-4a25-ba9f-f6a337df3927"
+        }
+      ],
+      "requests": [],
+      "auth": {
+        "authType": "inherit",
+        "authActive": true
+      },
+      "headers": [],
+      "_ref_id": "coll_mdzftv5t_a0932d13-a99e-4a90-9e60-2e176f0da9f5"
+    }
+  ],
+  "requests": [
+    {
+      "v": "15",
+      "name": "Health",
+      "method": "GET",
+      "endpoint": "http://localhost:8000/up",
+      "params": [],
+      "headers": [],
+      "preRequestScript": "",
+      "testScript": "",
+      "auth": {
+        "authType": "inherit",
+        "authActive": true
+      },
+      "body": {
+        "contentType": null,
+        "body": null
+      },
+      "requestVariables": [],
+      "responses": {}
+    }
+  ],
+  "auth": {
+    "authType": "bearer",
+    "authActive": true,
+    "token": "1|E8gltOteXcdmPtHyd3Cc0NaAHZmZ5T9UMTxULgOh88cbbc83"
+  },
+  "headers": [],
+  "_ref_id": "coll_mdh188z8_1f7697df-6866-493a-a364-bd3158cfd42e"
+}
