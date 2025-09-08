@@ -1,4 +1,4 @@
-# 🏨 Havenly Hotel Booking API Documentation
+# 🏨 VietStay Hotel Booking API Documentation
 
 ## 📋 Overview
 
@@ -48,7 +48,7 @@ From the seeded data:
 API List is in `api.json`. Import to Hoppscotch to use it.
 
 - After logged in as user or admin, copy token
-- Right click on folder havenly on the right side bar, click on 'Properties', click 'Authorization'
+- Right click on folder vietstay on the right side bar, click on 'Properties', click 'Authorization'
 - Paste the token in to 'Token' field
 - If logged in as 'user', you can call Users API
 - If logged in as 'admin, you can call Admin API

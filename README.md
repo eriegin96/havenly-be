@@ -1,4 +1,4 @@
-# 🏨 Havenly Hotel Booking API Documentation
+# 🏨 VietStay Hotel Booking API Documentation
 
 ## 📋 Overview
 

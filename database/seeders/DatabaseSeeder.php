@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 class DatabaseSeeder extends Seeder
 {
     /**
-     * Seed the application's database with exact data from havenly.sql
+     * Seed the application's database with exact data from vietstay.sql
      */
     public function run(): void
     {
