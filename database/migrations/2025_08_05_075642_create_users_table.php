@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('address', 255)->nullable();
             $table->string('phone', 20)->nullable();
             $table->date('dob')->nullable();
-            $table->string('avatar', 100)->default('chill-guy.png');
+            $table->string('avatar', 255)->default('storage/images/avatar/chill-guy.png');
             $table->string('password', 255);
             $table->enum('role', ['user', 'admin'])->default('user');
             $table->integer('status');

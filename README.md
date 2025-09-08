@@ -28,7 +28,8 @@ This is a comprehensive REST API for a hotel booking system built with Laravel 1
 6. Configure database settings
 7. Run `php artisan migrate`
 8. Run `php artisan db:seed`
-9. Start the server: `php artisan serve`
+9. Run `php artisan storage:link`
+10. Start the server: `php artisan serve`
 
 ### Default Credentials
 

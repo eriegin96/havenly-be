@@ -9,6 +9,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
@@ -139,7 +140,7 @@ class AuthController extends Controller
             'address' => 'nullable|string|max:255',
             'phone' => 'nullable|string|max:20',
             'dob' => 'nullable|date',
-            'avatar' => 'nullable|string|max:100',
+            'avatar' => 'nullable|string|max:255',
         ]);
 
         if ($validator->fails()) {
@@ -195,5 +196,55 @@ class AuthController extends Controller
             'success' => true,
             'message' => 'Password changed successfully'
         ]);
+    }
+
+    /**
+     * Upload image and return the path
+     */
+    public function uploadImage(Request $request): JsonResponse
+    {
+        $validator = Validator::make($request->all(), [
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:5120', // 5MB max
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Validation errors',
+                'errors' => $validator->errors()
+            ], 422);
+        }
+
+        try {
+            /** @var UploadedFile $image */
+            $image = $request->file('image');
+
+            // Generate unique filename
+            $filename = time() . '_' . Str::random(10) . '.' . $image->getClientOriginalExtension();
+
+            // Store in public/images/avatar directory
+            $path = $image->storeAs('images/avatar', $filename, 'public');
+
+            // Return the full path that can be accessed via URL
+            $fullPath = 'storage/' . $path;
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Image uploaded successfully',
+                'data' => [
+                    'path' => $fullPath,
+                    'filename' => $filename,
+                    'original_name' => $image->getClientOriginalName(),
+                    'size' => $image->getSize(),
+                    'mime_type' => $image->getMimeType()
+                ]
+            ], 201);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to upload image',
+                'error' => $e->getMessage()
+            ], 500);
+        }
     }
 }

@@ -18,7 +18,7 @@ class RoomImageFactory extends Factory
     {
         return [
             'room_type_id' => \App\Models\RoomType::factory(),
-            'path' => fake()->imageUrl(800, 600, 'hotel', true),
+            'path' => 'storage/images/rooms/room-1.jpg',
             'is_thumbnail' => fake()->boolean(20), // 20% chance of being thumbnail
         ];
     }
