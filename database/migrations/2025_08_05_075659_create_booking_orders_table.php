@@ -24,7 +24,6 @@ return new class extends Migration
             $table->integer('children');
             $table->integer('total_price');
             $table->boolean('is_paid')->default(false);
-            $table->boolean('is_reviewed')->default(false);
             $table->timestamps();
         });
     }

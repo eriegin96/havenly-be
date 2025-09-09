@@ -23,7 +23,7 @@ class BookingController extends Controller
     $limit = (int) $request->input('limit', 20);
     $page = (int) $request->input('page', 1);
 
-    $query = BookingOrder::with(['user', 'roomType.images', 'room', 'review']);
+    $query = BookingOrder::with(['user', 'roomType.images', 'room']);
 
     // Filter by status
     if ($request->has('status') && $request->status) {
@@ -92,7 +92,7 @@ class BookingController extends Controller
    */
   public function show($id): JsonResponse
   {
-    $booking = BookingOrder::with(['user', 'roomType.images', 'room', 'review'])->find($id);
+    $booking = BookingOrder::with(['user', 'roomType.images', 'room'])->find($id);
 
     if (!$booking) {
       return response()->json([
@@ -350,7 +350,7 @@ class BookingController extends Controller
    */
   public function destroy($id): JsonResponse
   {
-    $booking = BookingOrder::with('review')->find($id);
+    $booking = BookingOrder::find($id);
 
     if (!$booking) {
       return response()->json([
@@ -362,11 +362,6 @@ class BookingController extends Controller
     DB::beginTransaction();
 
     try {
-      // Delete associated review if exists
-      if ($booking->review) {
-        $booking->review->delete();
-      }
-
       // Delete booking
       $booking->delete();
 

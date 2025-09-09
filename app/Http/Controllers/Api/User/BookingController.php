@@ -24,7 +24,7 @@ class BookingController extends Controller
     $page = (int) $request->input('page', 1);
 
     $query = BookingOrder::where('user_id', $user->id)
-      ->with(['roomType.images', 'room', 'review']);
+      ->with(['roomType.images', 'room']);
 
     // Filter by status
     if ($request->has('status') && $request->status) {
@@ -140,7 +140,6 @@ class BookingController extends Controller
         'children' => $request->children,
         'total_price' => $totalPrice,
         'is_paid' => false,
-        'is_reviewed' => false
       ]);
 
       DB::commit();
@@ -176,7 +175,7 @@ class BookingController extends Controller
 
     $booking = BookingOrder::where('user_id', $user->id)
       ->where('id', $id)
-      ->with(['roomType.images', 'room', 'user', 'review'])
+      ->with(['roomType.images', 'room', 'user'])
       ->first();
 
     if (!$booking) {
@@ -199,8 +198,7 @@ class BookingController extends Controller
         'booking' => $booking,
         'nights' => $nights,
         'days_until_checkin' => $daysUntilCheckIn,
-        'can_cancel' => $this->canCancelBooking($booking),
-        'can_review' => $this->canReviewBooking($booking)
+        'can_cancel' => $this->canCancelBooking($booking)
       ]
     ]);
   }
@@ -258,9 +256,6 @@ class BookingController extends Controller
       'total_spent' => BookingOrder::where('user_id', $user->id)
         ->whereIn('status', ['confirmed', 'completed', 'checked-in', 'checked-out'])
         ->sum('total_price'),
-      'reviews_given' => BookingOrder::where('user_id', $user->id)
-        ->where('is_reviewed', true)
-        ->count()
     ];
 
     return response()->json([
@@ -287,13 +282,5 @@ class BookingController extends Controller
     }
 
     return false;
-  }
-
-  /**
-   * Check if a booking can be reviewed
-   */
-  private function canReviewBooking(BookingOrder $booking): bool
-  {
-    return $booking->status === 'completed' && !$booking->is_reviewed;
   }
 }

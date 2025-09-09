@@ -23,7 +23,6 @@ class BookingOrder extends Model
         'children',
         'total_price',
         'is_paid',
-        'is_reviewed',
     ];
 
     protected function casts(): array
@@ -32,7 +31,6 @@ class BookingOrder extends Model
             'check_in_date' => 'datetime',
             'check_out_date' => 'datetime',
             'is_paid' => 'boolean',
-            'is_reviewed' => 'boolean',
         ];
     }
 
@@ -58,13 +56,5 @@ class BookingOrder extends Model
     public function room(): BelongsTo
     {
         return $this->belongsTo(Room::class);
-    }
-
-    /**
-     * Get the review for this booking order.
-     */
-    public function review(): HasOne
-    {
-        return $this->hasOne(BookingReview::class);
     }
 }

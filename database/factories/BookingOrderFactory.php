@@ -31,7 +31,6 @@ class BookingOrderFactory extends Factory
             'children' => fake()->numberBetween(0, 2),
             'total_price' => fake()->numberBetween(200, 5000),
             'is_paid' => fake()->boolean(70),
-            'is_reviewed' => fake()->boolean(30),
         ];
     }
 }

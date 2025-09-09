@@ -2,9 +2,10 @@
 
 ## 📋 Overview
 
-This is a comprehensive REST API for a hotel booking system built with Laravel 12. The API supports authentication, room management, booking operations, reviews, and administrative functions.
+This is a comprehensive REST API for a hotel booking system built with Laravel 12. The API supports authentication, room management, booking operations, and administrative functions.
 
-**Base URL:** `http://localhost:8000/api`
+**Base URL:** `http://localhost:8000`
+**API URL:** `http://localhost:8000/api`
 
 
 ---
