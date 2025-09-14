@@ -101,28 +101,27 @@ class BookingController extends Controller
       ], 404);
     }
 
-    // Get available rooms for this booking if not assigned
-    $availableRooms = [];
-    if (!$booking->room_id && $booking->status !== 'cancelled') {
-      $checkInDate = Carbon::parse($booking->check_in_date);
-      $checkOutDate = Carbon::parse($booking->check_out_date);
+    // Get available rooms for this booking (always return for admin management)
+    $checkInDate = Carbon::parse($booking->check_in_date);
+    $checkOutDate = Carbon::parse($booking->check_out_date);
 
-      $availableRooms = Room::where('room_type_id', $booking->room_type_id)
-        ->where('is_active', true)
-        ->whereDoesntHave('bookingOrders', function ($query) use ($checkInDate, $checkOutDate, $booking) {
-          $query->whereIn('status', ['pending', 'confirmed', 'checked-in'])
-            ->where('id', '!=', $booking->id)
-            ->where(function ($q) use ($checkInDate, $checkOutDate) {
-              $q->whereBetween('check_in_date', [$checkInDate, $checkOutDate])
-                ->orWhereBetween('check_out_date', [$checkInDate, $checkOutDate])
-                ->orWhere(function ($q2) use ($checkInDate, $checkOutDate) {
-                  $q2->where('check_in_date', '<=', $checkInDate)
-                    ->where('check_out_date', '>=', $checkOutDate);
-                });
-            });
-        })
-        ->get();
-    }
+    $availableRooms = Room::where('room_type_id', $booking->room_type_id)
+      ->where('is_active', true)
+      ->with('roomType')
+      ->whereDoesntHave('bookingOrders', function ($query) use ($checkInDate, $checkOutDate, $booking) {
+        $query->whereIn('status', ['pending', 'confirmed', 'checked-in', 'checked-out'])
+          ->where('id', '!=', $booking->id)
+          ->where(function ($q) use ($checkInDate, $checkOutDate) {
+            $q->whereBetween('check_in_date', [$checkInDate, $checkOutDate])
+              ->orWhereBetween('check_out_date', [$checkInDate, $checkOutDate])
+              ->orWhere(function ($q2) use ($checkInDate, $checkOutDate) {
+                $q2->where('check_in_date', '<=', $checkInDate)
+                  ->where('check_out_date', '>=', $checkOutDate);
+              });
+          });
+      })
+      ->orderBy('room_number', 'asc')
+      ->get();
 
     // Calculate additional info
     $checkInDate = Carbon::parse($booking->check_in_date);
@@ -141,87 +140,9 @@ class BookingController extends Controller
   }
 
 
-  /**
-   * Assign room to booking
-   */
-  public function assignRoom(Request $request, $id): JsonResponse
-  {
-    $booking = BookingOrder::find($id);
-
-    if (!$booking) {
-      return response()->json([
-        'success' => false,
-        'message' => 'Booking not found'
-      ], 404);
-    }
-
-    $validator = Validator::make($request->all(), [
-      'room_id' => 'required|integer|exists:rooms,id'
-    ]);
-
-    if ($validator->fails()) {
-      return response()->json([
-        'success' => false,
-        'message' => 'Validation errors',
-        'errors' => $validator->errors()
-      ], 422);
-    }
-
-    $room = Room::find($request->room_id);
-
-    // Validate room belongs to the same room type
-    if ($room->room_type_id !== $booking->room_type_id) {
-      return response()->json([
-        'success' => false,
-        'message' => 'Room does not belong to the booked room type'
-      ], 400);
-    }
-
-    // Check if room is active
-    if (!$room->is_active) {
-      return response()->json([
-        'success' => false,
-        'message' => 'Room is not active'
-      ], 400);
-    }
-
-    // Check room availability for the booking dates
-    $checkInDate = Carbon::parse($booking->check_in_date);
-    $checkOutDate = Carbon::parse($booking->check_out_date);
-
-    $conflictingBooking = BookingOrder::where('room_id', $room->id)
-      ->whereIn('status', ['pending', 'confirmed', 'checked-in'])
-      ->where('id', '!=', $booking->id)
-      ->where(function ($q) use ($checkInDate, $checkOutDate) {
-        $q->whereBetween('check_in_date', [$checkInDate, $checkOutDate])
-          ->orWhereBetween('check_out_date', [$checkInDate, $checkOutDate])
-          ->orWhere(function ($q2) use ($checkInDate, $checkOutDate) {
-            $q2->where('check_in_date', '<=', $checkInDate)
-              ->where('check_out_date', '>=', $checkOutDate);
-          });
-      })
-      ->first();
-
-    if ($conflictingBooking) {
-      return response()->json([
-        'success' => false,
-        'message' => 'Room is not available for the selected dates. Conflicting booking exists.'
-      ], 400);
-    }
-
-    // Assign room to booking
-    $booking->update(['room_id' => $room->id]);
-    $booking->load(['user', 'roomType.images', 'room']);
-
-    return response()->json([
-      'success' => true,
-      'message' => 'Room assigned to booking successfully',
-      'data' => $booking
-    ]);
-  }
 
   /**
-   * Update booking details
+   * Update booking details (including room assignment/removal)
    */
   public function update(Request $request, $id): JsonResponse
   {
@@ -249,7 +170,8 @@ class BookingController extends Controller
       'children' => 'nullable|integer|min:0|max:10',
       'total_price' => 'nullable|numeric|min:0',
       'is_paid' => 'nullable|boolean',
-      'status' => 'nullable|string|in:pending,confirmed,checked-in,checked-out,completed,cancelled'
+      'status' => 'nullable|string|in:pending,confirmed,checked-in,checked-out,completed,cancelled',
+      'room_id' => 'nullable|integer|exists:rooms,id'
     ]);
 
     if ($validator->fails()) {
@@ -260,61 +182,67 @@ class BookingController extends Controller
       ], 422);
     }
 
-    // Prevent updates to completed or cancelled bookings (except payment status)
-    if (in_array($booking->status, ['completed', 'cancelled'])) {
-      $allowedFields = ['is_paid'];
-      $requestFields = array_keys($request->all());
-      $disallowedFields = array_diff($requestFields, $allowedFields);
-
-      if (!empty($disallowedFields)) {
-        return response()->json([
-          'success' => false,
-          'message' => 'Cannot update ' . implode(', ', $disallowedFields) . ' for ' . $booking->status . ' bookings'
-        ], 400);
-      }
-    }
-
     DB::beginTransaction();
 
     try {
-      // If dates are being changed, validate room availability
-      if ($request->has('check_in_date') || $request->has('check_out_date')) {
-        $newCheckIn = $request->input('check_in_date', $booking->check_in_date);
-        $newCheckOut = $request->input('check_out_date', $booking->check_out_date);
+      // Validate room assignment if provided
+      if ($request->has('room_id')) {
+        $newRoomId = $request->input('room_id');
 
-        if ($booking->room_id) {
-          $conflictingBooking = BookingOrder::where('room_id', $booking->room_id)
-            ->whereIn('status', ['pending', 'confirmed', 'checked-in'])
-            ->where('id', '!=', $booking->id)
-            ->where(function ($q) use ($newCheckIn, $newCheckOut) {
-              $q->whereBetween('check_in_date', [$newCheckIn, $newCheckOut])
-                ->orWhereBetween('check_out_date', [$newCheckIn, $newCheckOut])
-                ->orWhere(function ($q2) use ($newCheckIn, $newCheckOut) {
-                  $q2->where('check_in_date', '<=', $newCheckIn)
-                    ->where('check_out_date', '>=', $newCheckOut);
-                });
-            })
-            ->first();
+        // If room_id is not null, validate the room
+        if ($newRoomId !== null) {
+          $room = Room::find($newRoomId);
 
-          if ($conflictingBooking) {
+          if (!$room) {
             return response()->json([
               'success' => false,
-              'message' => 'Room is not available for the new dates. Please unassign room or choose different dates.'
+              'message' => 'Room not found'
+            ], 404);
+          }
+
+          // Validate room belongs to the same room type
+          if ($room->room_type_id !== $booking->room_type_id) {
+            return response()->json([
+              'success' => false,
+              'message' => 'Room does not belong to the booked room type'
+            ], 400);
+          }
+
+          // Check if room is active
+          if (!$room->is_active) {
+            return response()->json([
+              'success' => false,
+              'message' => 'Room is not active'
             ], 400);
           }
         }
+      }
 
-        // Recalculate total price if dates changed and price not explicitly set
-        if (!$request->has('total_price')) {
-          $checkInDate = Carbon::parse($newCheckIn);
-          $checkOutDate = Carbon::parse($newCheckOut);
-          $nights = $checkInDate->diffInDays($checkOutDate);
-          $roomType = RoomType::find($booking->room_type_id);
-          $request->merge(['total_price' => $nights * $roomType->price]);
+      // Validate room requirement for confirmed and checked-in status
+      if ($request->has('status')) {
+        $newStatus = $request->input('status');
+        $roomId = $request->input('room_id', $booking->room_id);
+
+        if (in_array($newStatus, ['confirmed', 'checked-in']) && !$roomId) {
+          return response()->json([
+            'success' => false,
+            'message' => 'Room assignment is required for ' . $newStatus . ' status'
+          ], 400);
         }
       }
 
-      // Update booking
+      // Recalculate total price if dates changed and price not explicitly set
+      if (($request->has('check_in_date') || $request->has('check_out_date')) && !$request->has('total_price')) {
+        $checkInDate = $request->input('check_in_date', $booking->check_in_date);
+        $checkOutDate = $request->input('check_out_date', $booking->check_out_date);
+        $checkInCarbon = Carbon::parse($checkInDate);
+        $checkOutCarbon = Carbon::parse($checkOutDate);
+        $nights = $checkInCarbon->diffInDays($checkOutCarbon);
+        $roomType = RoomType::find($booking->room_type_id);
+        $request->merge(['total_price' => $nights * $roomType->price]);
+      }
+
+      // Update booking with all allowed fields
       $booking->update($request->only([
         'check_in_date',
         'check_out_date',
@@ -323,7 +251,8 @@ class BookingController extends Controller
         'children',
         'total_price',
         'is_paid',
-        'status'
+        'status',
+        'room_id'
       ]));
 
       DB::commit();
@@ -453,7 +382,7 @@ class BookingController extends Controller
     $availableRooms = Room::where('room_type_id', $roomTypeId)
       ->where('is_active', true)
       ->whereDoesntHave('bookingOrders', function ($query) use ($checkInDate, $checkOutDate, $excludeBookingId) {
-        $query->whereIn('status', ['pending', 'confirmed', 'checked-in']);
+        $query->whereIn('status', ['pending', 'confirmed', 'checked-in', 'checked-out']);
 
         if ($excludeBookingId) {
           $query->where('id', '!=', $excludeBookingId);

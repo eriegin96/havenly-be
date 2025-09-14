@@ -110,10 +110,10 @@ Route::middleware(['auth:sanctum', 'role:admin'])->prefix('admin')->group(functi
 
   // Booking management
   Route::get('/bookings', [AdminBookingController::class, 'index']);
+  Route::get('/bookings/available-rooms', [AdminBookingController::class, 'getAvailableRooms']);
   Route::get('/bookings/{id}', [AdminBookingController::class, 'show']);
   Route::put('/bookings/{id}', [AdminBookingController::class, 'update']);
   Route::delete('/bookings/{id}', [AdminBookingController::class, 'destroy']);
-  Route::post('/bookings/{id}/assign-room', [AdminBookingController::class, 'assignRoom']);
 
   // Query management
   Route::get('/queries', [AdminQueryController::class, 'index']);

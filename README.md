@@ -38,9 +38,9 @@ From the seeded data:
 
 -   **Admin**: admin@gmail.com / 123456
 -   **User Examples**:
-    -   hung@gmail.com / 123456
-    -   trung@gmail.com / 123456
-    -   huy@gmail.com / 123456
-    -   hieu@gmail.com / 123456
+    -   vu@gmail.com / 123456
+    -   phuong@gmail.com / 123456
+    -   thao@gmail.com / 123456
+    -   tung@gmail.com / 123456
 
 **Note:** All seeded users use the password: `123456` (properly hashed in database)
