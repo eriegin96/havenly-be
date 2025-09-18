@@ -227,7 +227,7 @@ API List is in `api.json`. Import to Hoppscotch to use it.
 **Request Body:**
 
 ```
-image: file (required, image, max:5MB, types: jpeg,png,jpg,gif)
+image: file (required, image, max:5MB, types: jpeg,png,jpg,gif, webp)
 ```
 
 **Response (201):**

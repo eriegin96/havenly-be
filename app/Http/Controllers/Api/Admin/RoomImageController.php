@@ -261,7 +261,7 @@ class RoomImageController extends Controller
   public function uploadImage(Request $request): JsonResponse
   {
     $validator = Validator::make($request->all(), [
-      'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:5120', // 5MB max
+      'image' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:5120', // 5MB max
     ]);
 
     if ($validator->fails()) {
